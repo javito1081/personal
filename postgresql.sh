@@ -7,7 +7,7 @@ if [ "x$ID" != "x0" ]; then
   exit 1
 fi
 
-apt list | grep check-postgres/
+apt show postgresql | grep APT-Manual-Installed
 if [ $? -ne 0 ]; then
      echo "########################################################"
      echo "###   Installing PostgreSQL from Ubuntu repository   ###"
