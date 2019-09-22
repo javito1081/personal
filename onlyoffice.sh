@@ -23,7 +23,7 @@ echo "deb http://download.onlyoffice.com/repo/debian squeeze main" | sudo tee /e
 if [ $? -ne 0 ]; then
      echo
      echo Adding Failed!
-     exit 0
+     exit 1
 fi
 echo
 echo
@@ -35,7 +35,7 @@ apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys CB2DE8E5
 if [ $? -ne 0 ]; then
      echo
      echo Importing Failed!
-     exit 0
+     exit 1
 fi
 echo
 echo
@@ -89,7 +89,7 @@ if [[ $choice == Y ]]; then
    if [ $? -ne 0 ]; then
       echo
       echo Setting port Failed!
-      exit 0
+      exit 1
    fi
    jumpto onlyoffice
 fi
@@ -109,7 +109,7 @@ apt install onlyoffice-documentserver -y
 if [ $? -ne 0 ]; then
    echo
    echo Installation Failed!
-   exit 0
+   exit 1
 fi
 echo
 echo
