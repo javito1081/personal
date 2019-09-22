@@ -33,10 +33,3 @@ if [ $? -ne 0 ]; then
      echo
      echo
 fi
-
-echo "#####################################"
-echo "###   Checking Node.js version.   ###"
-echo "#####################################"
-node -v
-echo
-echo
