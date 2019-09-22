@@ -11,12 +11,12 @@ echo "#############################################"
 echo "###   Install Redis Server and Rabbitmq   ###"
 echo "#############################################"
 echo Checking Redis
-apt list | grep redis-server/bionic
+apt show redis-server | grep APT-Manual-Installed
 if [ $? -ne 0 ]; then
      apt install redis-server -y
 fi
 echo Checking Rabbit
-apt list | grep rabbitmq-server/bionic
+apt show rabbitmq-server | grep APT-Manual-Installed
 if [ $? -ne 0 ]; then
      apt install rabbitmq-server -y
 fi
