@@ -163,7 +163,7 @@ echo "#########################################"
 echo "###                                   ###"
 echo "###      Installation Complete!       ###"
 echo "###                                   ###"
-echo "###   Test at http://localhost:$spellport   ###"
+echo "###   Test at http://localhost:$port   ###"
 echo "###                                   ###"
 echo "#########################################"
 echo
