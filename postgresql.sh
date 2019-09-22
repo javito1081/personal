@@ -16,7 +16,7 @@ if [ $? -ne 0 ]; then
      if [ $? -ne 0 ]; then
           echo
           echo Installation Failed!
-          exit 0
+          exit 1
      fi
      echo
      echo
@@ -29,7 +29,7 @@ sudo -u postgres psql -c "CREATE DATABASE onlyoffice;"
 if [ $? -ne 0 ]; then
      echo
      echo Creation Failed!
-     exit 0
+     exit 1
 fi
 echo
 echo
@@ -41,7 +41,7 @@ sudo -u postgres psql -c "CREATE USER onlyoffice WITH password 'onlyoffice';"
 if [ $? -ne 0 ]; then
      echo
      echo Creation Failed!
-     exit 0
+     exit 1
 fi
 echo
 echo
@@ -53,7 +53,7 @@ sudo -u postgres psql -c "GRANT ALL privileges ON DATABASE onlyoffice TO onlyoff
 if [ $? -ne 0 ]; then
      echo
      echo Grant Failed!
-     exit 0
+     exit 1
 fi
 echo
 echo
