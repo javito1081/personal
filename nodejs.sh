@@ -19,7 +19,7 @@ fi
 echo
 echo
 
-sudo apt show nodejs | grep APT-Manual-Installed
+apt show nodejs | grep APT-Manual-Installed
 if [ $? -ne 0 ]; then
      echo "############################"
      echo "###   Install Node.js.   ###"
