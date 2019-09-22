@@ -19,7 +19,7 @@ fi
 echo
 echo
 
-apt list | grep nodejs/bionic
+sudo apt show nodejs | grep APT-Manual-Installed
 if [ $? -ne 0 ]; then
      echo "############################"
      echo "###   Install Node.js.   ###"
