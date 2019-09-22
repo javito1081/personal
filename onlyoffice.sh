@@ -159,12 +159,12 @@ else
 fi
 
 end:
-echo "###############################################"
-echo "###                                         ###"
-echo "###         Installation Complete!          ###"
-echo "###                                         ###"
+echo "#########################################"
+echo "###                                   ###"
+echo "###      Installation Complete!       ###"
+echo "###                                   ###"
 echo "###   Test at http://localhost:$spellport   ###"
-echo "###                                         ###"
-echo "###############################################"
+echo "###                                   ###"
+echo "#########################################"
 echo
 echo
