@@ -159,12 +159,12 @@ else
 fi
 
 end:
+hn=$(ifconfig | sed -n '2 p' | awk '{print $2}')
 echo "#########################################"
 echo "###                                   ###"
 echo "###      Installation Complete!       ###"
 echo "###                                   ###"
-echo "###   Test at http://localhost:$port   ###"
-echo "###                                   ###"
 echo "#########################################"
+echo Test at http://$hn:$port
 echo
 echo
