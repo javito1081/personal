@@ -14,7 +14,7 @@ curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
 if [ $? -ne 0 ]; then
      echo
      echo Adding Failed!
-     exit 0
+     exit 1
 fi
 echo
 echo
@@ -28,7 +28,7 @@ if [ $? -ne 0 ]; then
      if [ $? -ne 0 ]; then
           echo
           echo Installation Failed!
-          exit 0
+          exit 1
      fi
      echo
      echo
