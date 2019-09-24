@@ -79,6 +79,36 @@ fi
 rm result
 
 systemctl status mariadb | grep Active
+
+systemctl status mariadb | grep "Active: active" /dev/null 2>&1
+if [ $? == 0 ]; then
+	cat /etc/mysql/my.cnf | grep [mysqld] > /dev/null 2>&1
+	if [ $? -ne 0 ]; then
+		bash -c "echo -en '\n[mysqld]\n' >> /etc/mysql/my.cnf"
+	fi
+
+	cat /etc/mysql/my.cnf | grep innodb_large_prefix=true > /dev/null 2>&1
+	if [ $? -ne 0 ]; then
+		bash -c "echo -en '\ninnodb_large_prefix=true' >> /etc/mysql/my.cnf"
+	fi
+
+	cat /etc/mysql/my.cnf | grep innodb_file_format=barracuda > /dev/null 2>&1
+	if [ $? -ne 0 ]; then
+		bash -c "echo -en '\ninnodb_file_format=barracuda' >> /etc/mysql/my.cnf"
+	fi
+
+	cat /etc/mysql/my.cnf | grep innodb_file_per_table=1 > /dev/null 2>&1
+	if [ $? -ne 0 ]; then
+		bash -c "echo -en '\ninnodb_file_per_table=1' >> /etc/mysql/my.cnf"
+	fi
+else
+	echo
+	echo MariaDB is not Active, check \"journalctl -xe\" for details
+	exit 1
+fi
+
+service mysql restart
+mysql -e 'SET GLOBAL innodb_file_format=Barracuda' > /dev/null 2>&1
 echo
 echo
 
@@ -175,20 +205,6 @@ if [ $? -ne 0 ]; then
 	echo
 	echo Installing php7.2-json
     apt install -y php7.2-json > /dev/null 2>&1
-	if [ $? -ne 0 ]; then
-		echo Installation Failed!
-		exit 1
-	fi
-	echo
-	echo Done!
-fi
-rm result
-
-apt show php7.2-opcache > /dev/null 2>&1 > result ;cat result | grep "APT-Manual-Installed" > /dev/null 2>&1
-if [ $? -ne 0 ]; then
-	echo
-	echo Installing pgp7.2-opcache
-    apt install -y php7.2-opcache > /dev/null 2>&1
 	if [ $? -ne 0 ]; then
 		echo Installation Failed!
 		exit 1
@@ -324,12 +340,34 @@ if [ $? -ne 0 ]; then
 fi
 rm result
 
+apt show php-apcu > /dev/null 2>&1 > result ;cat result | grep "APT-Manual-Installed" > /dev/null 2>&1
+if [ $? -ne 0 ]; then
+	echo
+	echo Installing php-apcu
+    apt install -y php-apcu > /dev/null 2>&1
+	if [ $? -ne 0 ]; then
+		echo Installation Failed!
+		exit 1
+	fi
+	service nginx restart
+	service php7.2-fpm restart
+	echo
+	echo Done!
+fi
+rm result
+
 apt show php7.2-fpm > /dev/null 2>&1 > result ;cat result | grep "APT-Manual-Installed" > /dev/null 2>&1
 if [ $? == 0 ]; then
     systemctl start php7.2-fpm > /dev/null 2>&1
 	systemctl enable php7.2-fpm > /dev/null 2>&1
 fi
 rm result
+
+cat /etc/php/7.2/fpm/pool.d/www.conf | grep "clear_env = no" > /dev/null 2>&1
+if [ $? -ne 0 ]; then
+	sed -i "s/\;clear_env = no/clear_env = no/g" /etc/php/7.2/fpm/pool.d/www.conf
+	systemctl restart php7.2-fpm
+fi
 
 echo Checking status on php7.2-fpm
 systemctl status php7.2-fpm | grep Active
@@ -339,7 +377,8 @@ echo
 echo "##################################"
 echo "###   Done with Dependencies   ###"
 echo "##################################"
-sleep 5
+echo
+read -n 1 -s -r -p "Press any key to continue"
 echo
 echo
 
