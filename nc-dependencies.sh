@@ -42,6 +42,7 @@ if [ $? -ne 0 ]; then
 	wget https://raw.githubusercontent.com/javito1081/personal/master/mysql_secure.sh > /dev/null 2>&1
 	chmod a+x mysql_secure.sh
 	./mysql_secure.sh rootnodoubt > /dev/null 2>&1
+	rm mysql_secure.sh
 	echo
 	echo Done!
 fi
