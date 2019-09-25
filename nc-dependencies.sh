@@ -362,8 +362,8 @@ if [ $? == 0 ]; then
 fi
 rm result
 
-cat /etc/php/7.2/fpm/pool.d/www.conf | grep "clear_env = no" > /dev/null 2>&1
-if [ $? -ne 0 ]; then
+cat /etc/php/7.2/fpm/pool.d/www.conf | grep ";clear_env = no" > /dev/null 2>&1
+if [ $? == 0 ]; then
 	sed -i "s/\;clear_env = no/clear_env = no/g" /etc/php/7.2/fpm/pool.d/www.conf
 	systemctl restart php7.2-fpm
 fi
