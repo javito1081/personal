@@ -80,7 +80,7 @@ rm result
 
 systemctl status mariadb | grep Active
 
-systemctl status mariadb | grep "Active: active" /dev/null 2>&1
+systemctl status mariadb | grep "Active: active" > /dev/null 2>&1
 if [ $? == 0 ]; then
 	cat /etc/mysql/my.cnf | grep [mysqld] > /dev/null 2>&1
 	if [ $? -ne 0 ]; then
