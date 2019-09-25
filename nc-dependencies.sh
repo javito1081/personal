@@ -39,7 +39,9 @@ if [ $? -ne 0 ]; then
 	echo "###################################"
 	echo "###   Securing MariaDB Server   ###"
 	echo "###################################"
-	mysql_secure_installation
+	wget https://raw.githubusercontent.com/javito1081/personal/master/mysql_secure.sh > /dev/null 2>&1
+	chmod a+x mysql_secure.sh
+	./mysql_secure.sh rootnodoubt
 	echo
 	echo Done!
 fi
