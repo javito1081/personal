@@ -36,6 +36,10 @@ if [ $? -ne 0 ]; then
 		echo Installation Failed!
 		exit 1
 	fi
+	echo "###################################"
+	echo "###   Securing MariaDB Server   ###"
+	echo "###################################"
+	mysql_secure_installation
 	echo
 	echo Done!
 fi
