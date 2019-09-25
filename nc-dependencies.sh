@@ -108,7 +108,6 @@ else
 fi
 
 service mysql restart
-mysql -e 'SET GLOBAL innodb_file_format=Barracuda' > /dev/null 2>&1
 echo
 echo
 
