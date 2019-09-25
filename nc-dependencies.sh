@@ -111,7 +111,7 @@ if [ $? -ne 0 ]; then
 	echo Done!
 fi
 rm result
-
+service apache2 status | grep Active
 apt show php7.2-fpm > /dev/null 2>&1 > result ;cat result | grep "APT-Manual-Installed" > /dev/null 2>&1
 if [ $? -ne 0 ]; then
 	echo
@@ -125,7 +125,7 @@ if [ $? -ne 0 ]; then
 	echo Done!
 fi
 rm result
-
+service apache2 status | grep Active
 apt show php7.2-mysql > /dev/null 2>&1 > result ;cat result | grep "APT-Manual-Installed" > /dev/null 2>&1
 if [ $? -ne 0 ]; then
 	echo
@@ -139,7 +139,7 @@ if [ $? -ne 0 ]; then
 	echo Done!
 fi
 rm result
-
+service apache2 status | grep Active
 apt show php-common > /dev/null 2>&1 > result ;cat result | grep "APT-Manual-Installed" > /dev/null 2>&1
 if [ $? -ne 0 ]; then
 	echo
@@ -153,7 +153,7 @@ if [ $? -ne 0 ]; then
 	echo Done!
 fi
 rm result
-
+service apache2 status | grep Active
 apt show php7.2-cli > /dev/null 2>&1 > result ;cat result | grep "APT-Manual-Installed" > /dev/null 2>&1
 if [ $? -ne 0 ]; then
 	echo
@@ -167,7 +167,7 @@ if [ $? -ne 0 ]; then
 	echo Done!
 fi
 rm result
-
+service apache2 status | grep Active
 apt show php7.2-common > /dev/null 2>&1 > result ;cat result | grep "APT-Manual-Installed" > /dev/null 2>&1
 if [ $? -ne 0 ]; then
 	echo
@@ -181,7 +181,7 @@ if [ $? -ne 0 ]; then
 	echo Done!
 fi
 rm result
-
+service apache2 status | grep Active
 apt show php7.2-json > /dev/null 2>&1 > result ;cat result | grep "APT-Manual-Installed" > /dev/null 2>&1
 if [ $? -ne 0 ]; then
 	echo
@@ -195,7 +195,7 @@ if [ $? -ne 0 ]; then
 	echo Done!
 fi
 rm result
-
+service apache2 status | grep Active
 apt show php7.2-readline > /dev/null 2>&1 > result ;cat result | grep "APT-Manual-Installed" > /dev/null 2>&1
 if [ $? -ne 0 ]; then
 	echo
@@ -209,7 +209,7 @@ if [ $? -ne 0 ]; then
 	echo Done!
 fi
 rm result
-
+service apache2 status | grep Active
 apt show php7.2-mbstring > /dev/null 2>&1 > result ;cat result | grep "APT-Manual-Installed" > /dev/null 2>&1
 if [ $? -ne 0 ]; then
 	echo
@@ -223,7 +223,7 @@ if [ $? -ne 0 ]; then
 	echo Done!
 fi
 rm result
-
+service apache2 status | grep Active
 apt show php7.2-xml > /dev/null 2>&1 > result ;cat result | grep "APT-Manual-Installed" > /dev/null 2>&1
 if [ $? -ne 0 ]; then
 	echo
@@ -237,7 +237,7 @@ if [ $? -ne 0 ]; then
 	echo Done!
 fi
 rm result
-
+service apache2 status | grep Active
 apt show php7.2-gd > /dev/null 2>&1 > result ;cat result | grep "APT-Manual-Installed" > /dev/null 2>&1
 if [ $? -ne 0 ]; then
 	echo
@@ -251,7 +251,7 @@ if [ $? -ne 0 ]; then
 	echo Done!
 fi
 rm result
-
+service apache2 status | grep Active
 apt show php7.2-curl > /dev/null 2>&1 > result ;cat result | grep "APT-Manual-Installed" > /dev/null 2>&1
 if [ $? -ne 0 ]; then
 	echo
@@ -265,7 +265,7 @@ if [ $? -ne 0 ]; then
 	echo Done!
 fi
 rm result
-
+service apache2 status | grep Active
 apt show php-imagick > /dev/null 2>&1 > result ;cat result | grep "APT-Manual-Installed" > /dev/null 2>&1
 if [ $? -ne 0 ]; then
 	echo
@@ -279,7 +279,7 @@ if [ $? -ne 0 ]; then
 	echo Done!
 fi
 rm result
-
+service apache2 status | grep Active
 apt show php7.2-zip > /dev/null 2>&1 > result ;cat result | grep "APT-Manual-Installed" > /dev/null 2>&1
 if [ $? -ne 0 ]; then
 	echo
@@ -293,7 +293,7 @@ if [ $? -ne 0 ]; then
 	echo Done!
 fi
 rm result
-
+service apache2 status | grep Active
 apt show php7.2-bz2 > /dev/null 2>&1 > result ;cat result | grep "APT-Manual-Installed" > /dev/null 2>&1
 if [ $? -ne 0 ]; then
 	echo
@@ -307,7 +307,7 @@ if [ $? -ne 0 ]; then
 	echo Done!
 fi
 rm result
-
+service apache2 status | grep Active
 apt show php7.2-intl > /dev/null 2>&1 > result ;cat result | grep "APT-Manual-Installed" > /dev/null 2>&1
 if [ $? -ne 0 ]; then
 	echo
@@ -321,7 +321,7 @@ if [ $? -ne 0 ]; then
 	echo Done!
 fi
 rm result
-
+service apache2 status | grep Active
 apt show php-apcu > /dev/null 2>&1 > result ;cat result | grep "APT-Manual-Installed" > /dev/null 2>&1
 if [ $? -ne 0 ]; then
 	echo
@@ -336,7 +336,7 @@ if [ $? -ne 0 ]; then
 	echo Done!
 fi
 rm result
-
+service apache2 status | grep Active
 cat /etc/php/7.2/fpm/pool.d/www.conf | grep ";clear_env = no" > /dev/null 2>&1
 if [ $? == 0 ]; then
 	sed -i "s/\;clear_env = no/clear_env = no/g" /etc/php/7.2/fpm/pool.d/www.conf
