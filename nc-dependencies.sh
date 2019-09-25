@@ -336,6 +336,8 @@ if [ $? == 0 ]; then
 	sed -i "s/\;clear_env = no/clear_env = no/g" /etc/php/7.2/fpm/pool.d/www.conf
 	systemctl restart php7.2-fpm
 fi
+echo
+echo
 
 
 echo "################################################"
