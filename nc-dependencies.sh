@@ -82,24 +82,24 @@ systemctl status mariadb | grep Active
 
 systemctl status mariadb | grep "Active: active" > /dev/null 2>&1
 if [ $? == 0 ]; then
-	cat /etc/mysql/my.cnf | grep [mysqld] > /dev/null 2>&1
+	cat /etc/mysql/my.cnf | grep -F [mysqld] > /dev/null 2>&1
 	if [ $? -ne 0 ]; then
-		bash -c "echo -en '\n[mysqld]\n' >> /etc/mysql/my.cnf"
+		bash -c "echo -en '\n[mysqld]' >> /etc/mysql/my.cnf"
 	fi
 
 	cat /etc/mysql/my.cnf | grep innodb_large_prefix=true > /dev/null 2>&1
 	if [ $? -ne 0 ]; then
-		bash -c "echo -en '\ninnodb_large_prefix=true' >> /etc/mysql/my.cnf"
+		sed -i "/^\[mysqld\]/a \ninnodb_large_prefix=true" /etc/mysql/my.cnf
 	fi
 
 	cat /etc/mysql/my.cnf | grep innodb_file_format=barracuda > /dev/null 2>&1
 	if [ $? -ne 0 ]; then
-		bash -c "echo -en '\ninnodb_file_format=barracuda' >> /etc/mysql/my.cnf"
+		sed -i "/^\[mysqld\]/a \ninnodb_file_format=barracuda" /etc/mysql/my.cnf
 	fi
 
 	cat /etc/mysql/my.cnf | grep innodb_file_per_table=1 > /dev/null 2>&1
 	if [ $? -ne 0 ]; then
-		bash -c "echo -en '\ninnodb_file_per_table=1' >> /etc/mysql/my.cnf"
+		sed -i "/^\[mysqld\]/a \ninnodb_file_format=barracuda" /etc/mysql/my.cnf
 	fi
 else
 	echo
