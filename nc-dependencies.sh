@@ -99,7 +99,7 @@ if [ $? == 0 ]; then
 
 	cat /etc/mysql/my.cnf | grep innodb_file_per_table=1 > /dev/null 2>&1
 	if [ $? -ne 0 ]; then
-		sed -i "/^\[mysqld\]/a \ninnodb_file_per_table=1 /etc/mysql/my.cnf
+		sed -i "/^\[mysqld\]/a \ninnodb_file_per_table=1" /etc/mysql/my.cnf
 	fi
 else
 	echo
