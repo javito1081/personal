@@ -23,29 +23,6 @@ apt upgrade -y
 echo
 echo 
 
-echo "################################################"
-echo "###   Checking/installing Nginx Web Server   ###"
-echo "################################################"
-apt show nginx > /dev/null 2>&1 > result ;cat result | grep "APT-Manual-Installed" > /dev/null 2>&1
-if [ $? -ne 0 ]; then
-	echo
-	echo Installing nginx
-    apt install -y nginx > /dev/null 2>&1
-	if [ $? -ne 0 ]; then
-		echo Installation Failed!
-		exit 1
-	fi
-	echo
-	echo Done!
-    systemctl enable nginx > /dev/null 2>&1
-    systemctl start nginx > /dev/null 2>&1
-fi
-rm result
-
-systemctl status nginx | grep Active
-echo
-echo
-
 
 echo "#####################################################"
 echo "###   Checking/installing MariaDB Server/Client   ###"
@@ -348,17 +325,9 @@ if [ $? -ne 0 ]; then
 		echo Installation Failed!
 		exit 1
 	fi
-	service nginx restart
 	service php7.2-fpm restart
 	echo
 	echo Done!
-fi
-rm result
-
-apt show php7.2-fpm > /dev/null 2>&1 > result ;cat result | grep "APT-Manual-Installed" > /dev/null 2>&1
-if [ $? == 0 ]; then
-    systemctl start php7.2-fpm > /dev/null 2>&1
-	systemctl enable php7.2-fpm > /dev/null 2>&1
 fi
 rm result
 
@@ -367,6 +336,28 @@ if [ $? == 0 ]; then
 	sed -i "s/\;clear_env = no/clear_env = no/g" /etc/php/7.2/fpm/pool.d/www.conf
 	systemctl restart php7.2-fpm
 fi
+
+
+echo "################################################"
+echo "###   Checking/installing Nginx Web Server   ###"
+echo "################################################"
+apt show nginx > /dev/null 2>&1 > result ;cat result | grep "APT-Manual-Installed" > /dev/null 2>&1
+if [ $? -ne 0 ]; then
+	echo
+	echo Installing nginx
+    apt install -y nginx > /dev/null 2>&1
+	if [ $? -ne 0 ]; then
+		echo Installation Failed!
+		exit 1
+	fi
+	echo
+	echo Done!
+	systemctl status nginx | grep Active
+fi
+rm result
+echo
+echo
+
 
 echo Checking status on php7.2-fpm
 systemctl status php7.2-fpm | grep Active
