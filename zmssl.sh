@@ -17,8 +17,10 @@ if [ "x$ID" != "x0" ]; then
 fi
 
 if ! [ -z $1 ]; then
-	option=1
-	jumpto beg
+	if [ $1 == 1 ]; then
+		option=1
+		jumpto beg
+	fi
 fi
 
 clear
